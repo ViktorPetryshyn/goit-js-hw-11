@@ -1,6 +1,19 @@
 <div class='photo-card'>
   <a href='{{largeImageURL}}'>
-    <img class='image' src='{{webformatURL}}' alt='{{tags}}' loading='lazy' />
+    <div class='img--container'>
+      <img class='image' src='{{webformatURL}}' alt='{{tags}}' loading='lazy' />
+      <div class='download--container'>
+        <a href='{{previewURL}}' class='download--btn' download=''>
+          low
+        </a>
+        <a href='{{webformatURL}}' class='download--btn' download=''>
+          normal
+        </a>
+        <a href='{{largeImageURL}}' class='download--btn' download=''>
+          hight
+        </a>
+      </div>
+    </div>
   </a>
   <div class='info'>
     <p class='info-item'>

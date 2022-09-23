@@ -7,14 +7,14 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa;
+  background-color: #e8eefa;
   color: #212121;
   line-height: 1.5;
 }
 
 .section {
   position: fixed;
-  width:  100%;
+  width: 100%;
   top: 0;
   display: flex;
   flex-direction: row;
@@ -23,7 +23,7 @@ body {
   height: 90px;
   padding: 15px;
   border-radius: 0 0 2ch 2ch;
-  background: linear-gradient(#3378FF, #9442FE);
+  background: linear-gradient(#3378ff, #9442fe);
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
@@ -37,11 +37,11 @@ body {
   width: 100%;
   height: 42px;
   padding-left: 10px;
-  border: 2px solid #aeb1b1;
+  border: 2px solid #ddc7ff;
   border-radius: 5px;
   outline: none;
   background: #f9f0da;
-  color: #9e9c9c;
+  color: #19005f;
 }
 
 .button {
@@ -51,25 +51,25 @@ body {
   width: 42px;
   height: 42px;
   border: none;
-  background: #aeb1b1;
+  background: #ddc7ff;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
 
 .button:before {
-  content: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='30 ' width='30'><path d='M13 3a10 10 0 1 0 6.3 17.7l6 6a1 1 0 1 0 1.4-1.4l-6-6A10 10 0 0 0 13 3zm0 2a8 8 0 1 1 0 16 8 8 0 1 1 0-16z' fill='%2171169' /></svg>");
+  content: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='30 ' width='30'><path d='M13 3a10 10 0 1 0 6.3 17.7l6 6a1 1 0 1 0 1.4-1.4l-6-6A10 10 0 0 0 13 3zm0 2a8 8 0 1 1 0 16 8 8 0 1 1 0-16z' fill='1638495%' /></svg>");
   font-family: FontAwesome;
   font-size: 16px;
-  color: #f9f0da;
 }
+
 .search-form:hover,
 .search-form:hover .input {
-  border-color: #777979;
+  border-color: #19005f;
   border-radius: 5px;
 }
 .search-form:hover,
 .search-form:hover .button {
-  background-color: #777979;
+  background-color: #19005f;
   border-radius: 0 5px 5px 0;
 }
 .image {
@@ -82,36 +82,36 @@ body {
   transform: scale(1.1);
 }
 .container {
-    width: 1440px;
+  width: 1440px;
 }
 .gallery {
-    margin: -15px;
-    overflow: hidden;
-    padding: 5px 15px 0;
-    @media screen and (max-width: 767px) {
-        width: 480px;
-        margin: 0 auto;
-      }
-    @media screen and (min-width: $tablet) {
-      display: flex;
-      flex-wrap: wrap;
-    }
+  margin: -15px;
+  overflow: hidden;
+  padding: 5px 15px 0;
+  @media screen and (max-width: 767px) {
+    width: 480px;
+    margin: 0 auto;
+  }
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 .photo-card {
-    margin: 15px;
+  margin: 15px;
+  background: #ffffff;
+  @media screen and (min-width: $tablet) {
+    width: calc((100% - 90px) / 3);
+  }
+  @media screen and (min-width: $desktop) {
+    width: calc((100% - 120px) / 4);
     background: #ffffff;
-    @media screen and (min-width: $tablet) {
-      width: calc((100% - 90px) / 3);
-    }
-    @media screen and (min-width: $desktop) {
-      width: calc((100% - 120px) / 4);
-      background: #ffffff;
-    }
+  }
   background: #ffffff;
   overflow: hidden;
   border-radius: 1ch;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.06),
-  1px 4px 6px rgba(0, 0, 0, 0.16);
+    1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 .image {
   display: block;
@@ -130,29 +130,47 @@ body {
   display: flex;
   flex-direction: column;
 }
-.position {
+.loaderimg {
   position: fixed;
   bottom: 0;
-}
-.loaderimg{
-    width: 40px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 80px;
 }
 .hidden {
   display: none;
-} 
+}
 
-.back-top {
+#back-top {
   display: none;
   position: fixed;
-  bottom: 20px;
-  right: 30px;
+  bottom: 30px;
+  right: 50px;
   z-index: 99;
-  font-size: 18px;
+  font-size: 25px;
   border: none;
   outline: none;
-  background-color: red;
-  color: white;
   cursor: pointer;
+  background-color: rgba(80, 18, 173, 0.8);
+  color: #ddc7ff;
   padding: 15px;
   border-radius: 4px;
+}
+
+.img--container {
+  position: relative;
+}
+.download--container {
+  position: absolute;
+  bottom: 5;
+  right: 5;
+}
+.download--btn {
+  background-color: rgba(80, 18, 173, 0.8);
+  color: #ddc7ff;
+  border: none;
+  border-radius: 5px;
+}
+.download--btn:not(:last-child) {
+  margin-right: 3px;
 }

@@ -5,17 +5,17 @@ import PhotoApiService from './js/photoApiService';
 import galleryMurkup from './templates/gallery-card.hbs';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const photoApiService = new PhotoApiService();
-
-let lightbox = new SimpleLightbox('.gallery a');
-
 const refs = {
   searchForm: document.querySelector('#search-form'),
   galleryBox: document.querySelector('.gallery'),
   loadImg: document.querySelector('.jsimg'),
-  backTopBtn: document.querySelector('#back-top')
+  backTopBtn: document.querySelector('#back-top'),
 };
-console.log(refs.backTopBtn);
+let lightbox = new SimpleLightbox('.gallery a');
+
+refs.backTopBtn.addEventListener('click', toTopFunction);
 refs.searchForm.addEventListener('submit', searchPhoto);
 window.addEventListener('scroll', loadMoreByScroll);
 
@@ -26,13 +26,14 @@ async function searchPhoto(e) {
   photoApiService.query = e.target.elements.searchQuery.value.trim();
   if (photoApiService.query === '') {
     Notify.failure('Please enter a search word!');
-    murkupReset();
     return;
   }
   try {
+    refs.loadImg.classList.remove('hidden');
     const response = await photoApiService.fetchPhoto();
     const totalHits = await response.data.totalHits;
     const hits = await response.data.hits;
+    refs.loadImg.classList.add('hidden');
     if (hits.length === 0) {
       murkupReset();
       Notify.failure(
@@ -51,11 +52,11 @@ async function searchPhoto(e) {
 async function loadMoreByScroll() {
   const documentRect = document.documentElement.getBoundingClientRect();
   if (documentRect.bottom < document.documentElement.clientHeight + 200) {
+    refs.loadImg.classList.remove('hidden');
     const response = await photoApiService.fetchPhoto();
-    const totalHits = await response.data.totalHits;
     const hits = await response.data.hits;
     renderGalleryCard(hits);
-    refs.loadImg.classList.toggle('hidden', !(totalHits > 40));
+    refs.loadImg.classList.add('hidden');
   }
 }
 
@@ -68,20 +69,32 @@ function murkupReset() {
   refs.galleryBox.innerHTML = '';
 }
 
-refs.backTopBtn.addEventListener('click', topFunction)
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+  visabilityButtonSwitcher();
+};
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    refs.backTopBtn.style.display = "block";
+function visabilityButtonSwitcher() {
+  if (
+    document.body.scrollTop > 400 ||
+    document.documentElement.scrollTop > 400
+  ) {
+    refs.backTopBtn.style.display = 'block';
   } else {
-    refs.backTopBtn.style.display = "none";
+    refs.backTopBtn.style.display = 'none';
   }
 }
 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+function toTopFunction() {
+  let scrollHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.body.clientHeight,
+    document.documentElement.clientHeight
+  );
+  window.scrollBy({
+    top: -scrollHeight,
+    behavior: 'smooth',
+  });
 }

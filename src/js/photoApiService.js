@@ -20,6 +20,7 @@ export default class PhotoApiService {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
+
   resetPage() {
     this.page = 0;
   }
