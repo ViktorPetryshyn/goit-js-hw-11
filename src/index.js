@@ -15,9 +15,10 @@ const refs = {
 };
 let lightbox = new SimpleLightbox('.gallery a');
 
-refs.backTopBtn.addEventListener('click', toTopFunction);
+refs.backTopBtn.addEventListener('click', scrollToTop);
 refs.searchForm.addEventListener('submit', searchPhoto);
 window.addEventListener('scroll', loadMoreByScroll);
+refs.loadImg.classList.add('hidden');
 
 async function searchPhoto(e) {
   murkupReset();
@@ -84,7 +85,7 @@ function visabilityButtonSwitcher() {
   }
 }
 
-function toTopFunction() {
+function scrollToTop() {
   let scrollHeight = Math.max(
     document.body.scrollHeight,
     document.documentElement.scrollHeight,
