@@ -56,8 +56,16 @@ async function loadMoreByScroll() {
     refs.loadImg.classList.remove('hidden');
     const response = await photoApiService.fetchPhoto();
     const hits = await response.data.hits;
+    const totalHits = await response.data.totalHits;
     renderGalleryCard(hits);
     refs.loadImg.classList.add('hidden');
+    if (refs.galleryBox.children.length === totalHits) {
+      Notify.info(
+        "We're sorry, but you've reached the end of search results.",
+        { showOnlyTheLastOne: true }
+      );
+      document.removeEventListener('scroll', loadMoreByScroll);
+    }
   }
 }
 
